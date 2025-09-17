@@ -1,9 +1,9 @@
 from django.db import models
 from  django.utils.text import slugify
 
-class Category(model.Modesl):
+class Category(models.Model):
     name = models.CharField(max_length=100)
-    slug = name = models.CharField(max_length=100, unique=True)
+    slug = models.CharField(max_length=100, unique=True)
 
 
     def save(self, *args, **kwargs):
@@ -21,9 +21,9 @@ class Category(model.Modesl):
 #     def __str__(self):
 #         return self.name
     
-class Product(models.Models):
+class Product(models.Model):
      name = models.CharField(max_length=100)
-     slug = name = models.CharField(max_length=100, unique=True)
+     slug = models.CharField(max_length=100, unique=True)
      category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                   related_name='products')
      subject = models.CharField(max_length=100)
@@ -34,6 +34,7 @@ class Product(models.Models):
      grade = models.CharField(max_length=3)
      created_at = models.DateTimeField(auto_now_add=True)
      updated_at = models.DateTimeField(auto_now=True)
+     part = models.CharField(max_length=5, blank=True)
 
      def save(self, *args, **kwargs):
         if not self.slug:
@@ -42,7 +43,7 @@ class Product(models.Models):
      def __str__(self):
         return self.name
      
-class ProductImage(models.Models):
+class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 related_name='images')
     image = models.ImageField(upload_to='products/extra/')
