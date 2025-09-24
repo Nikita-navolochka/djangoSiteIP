@@ -26,7 +26,6 @@ class Product(models.Model):
      slug = models.CharField(max_length=100, unique=True)
      category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                   related_name='products')
-     subject = models.CharField(max_length=100)
      author = models.CharField(max_length=200)
      description = models.TextField(blank=True)
      link = models.CharField(max_length=300)
